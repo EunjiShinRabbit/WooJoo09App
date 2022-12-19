@@ -6,6 +6,7 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { WebView } from 'react-native-webview';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -33,23 +34,23 @@ export default function MyTabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Feather name={"home"} color={color} size={size} />
+            <Ionicons name="home" color={color} size={size} />
           ),
         }}
       />
-      <Tab.Screen name="검색" component={Search}
+      {/* <Tab.Screen name="검색" component={Search}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen name="등록" component={Write}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name={"clipboard"} color={color} size={size} />
+            <Entypo name="pencil" color={color} size={size} />
           ),
         }}
       />
@@ -57,7 +58,7 @@ export default function MyTabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name={"rocketchat"} color={color} size={size}/>
+            <Ionicons name="chatbubbles-sharp" color={color} size={size}/>
           ),
         }}
       />
@@ -65,7 +66,7 @@ export default function MyTabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Feather name={"settings"} color={color} size={size} />
+            <Ionicons name="person-sharp" color={color} size={size} />
           ),
         }}
        />
@@ -103,20 +104,20 @@ function HomeMenu({ navigation }) {
   )
 }
 
-function Search({ navigation }) {
-  const webViewRef = useRef(null);
-  const [loading, setLoading] = useState(true);
+// function Search({ navigation }) {
+//   const webViewRef = useRef(null);
+//   const [loading, setLoading] = useState(true);
 
-  function LoadAnimation() {
-      return (<Spinner visible={loading} />)
-  }
+//   function LoadAnimation() {
+//       return (<Spinner visible={loading} />)
+//   }
 
-  return (
-      <SafeAreaView style={styles.container}>
-          <Text>안녕하세요. 여기는 Search 입니다.</Text>
-      </SafeAreaView>
-  )
-}
+//   return (
+//       <SafeAreaView style={styles.container}>
+//           <Text>안녕하세요. 여기는 Search 입니다.</Text>
+//       </SafeAreaView>
+//   )
+// }
 
 function Write({ navigation }) {
   const webViewRef = useRef(null);
@@ -127,9 +128,14 @@ function Write({ navigation }) {
   }
 
   return (
-      <SafeAreaView style={styles.container}>
-          <Text>안녕하세요. 여기는 Write 입니다.</Text>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <WebView
+          ref={webViewRef}
+          onLoad={() => setLoading(false)}
+          source={{ uri: 'http://13.209.198.107/write' }}
+      />
+      {loading && <LoadAnimation />}
+    </SafeAreaView>
   )
 }
 
@@ -142,9 +148,14 @@ function Chatting({ navigation }) {
   }
 
   return (
-      <SafeAreaView style={styles.container}>
-          <Text>안녕하세요. 여기는 Chatting 입니다.</Text>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+    <WebView
+        ref={webViewRef}
+        onLoad={() => setLoading(false)}
+        source={{ uri: 'http://13.209.198.107/chat' }}
+    />
+    {loading && <LoadAnimation />}
+  </SafeAreaView>
   )
 }
 
@@ -157,9 +168,14 @@ function MyPage({ navigation }) {
   }
 
   return (
-      <SafeAreaView style={styles.container}>
-          <Text>안녕하세요. 여기는 MY 입니다.</Text>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+    <WebView
+        ref={webViewRef}
+        onLoad={() => setLoading(false)}
+        source={{ uri: 'http://13.209.198.107/member' }}
+    />
+    {loading && <LoadAnimation />}
+  </SafeAreaView>
   )
 }
 
@@ -167,7 +183,7 @@ const styles = StyleSheet.create({
   container: {
     // 전체 영역을 다 잡는다는 것 flex 1
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    // marginTop: StatusBar.currentHeight || 0,
 },
   text: { fontSize: 28, color: 'white' },
   icon: { fontSize: 36, color: 'white' },
