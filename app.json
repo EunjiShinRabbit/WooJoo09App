@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "WooJoo09App",
+    "name": "우주공구",
     "slug": "WooJoo09App",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -21,13 +21,24 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.woojoo09",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ebdbe200-719c-4d7a-98b5-7b0fe2844126"
+      }
     }
   }
 }
