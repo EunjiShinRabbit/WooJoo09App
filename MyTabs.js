@@ -11,6 +11,11 @@ import { Entypo } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
+
+  StatusBar.setBackgroundColor("transparent");
+  StatusBar.setTranslucent(true);
+  StatusBar.setBarStyle("dark-content");
+
   return (
     // 탭 전체적인 형테 설정
     <Tab.Navigator
@@ -152,7 +157,7 @@ function Chatting({ navigation }) {
     <WebView
         ref={webViewRef}
         onLoad={() => setLoading(false)}
-        source={{ uri: 'http://13.209.198.107/chat' }}
+        source={{ uri: 'http://13.209.198.107/chatlist' }}
     />
     {loading && <LoadAnimation />}
   </SafeAreaView>
@@ -183,7 +188,7 @@ const styles = StyleSheet.create({
   container: {
     // 전체 영역을 다 잡는다는 것 flex 1
     flex: 1,
-    // marginTop: StatusBar.currentHeight || 0,
+    marginTop: StatusBar.currentHeight || 0,
 },
   text: { fontSize: 28, color: 'white' },
   icon: { fontSize: 36, color: 'white' },
